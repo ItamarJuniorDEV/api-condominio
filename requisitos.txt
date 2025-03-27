@@ -1,0 +1,13 @@
+Sistema de Gestão de Condomínio
+
+- Cadastro de Usuário
+- Cadastro de Unidades
+- Cadastro de arquivos da Unidade (Moradores, Veículos, Pets)
+- Mural de Avisos
+- Documentos
+- Reserva das áreas comuns (Lista de datas indisponíveis)
+- Achados e Perdidos
+- Livro de Ocorrências
+- Boletos
+
+
