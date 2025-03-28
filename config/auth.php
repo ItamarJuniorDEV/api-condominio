@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api', // Se você está criando uma API, é melhor o 'api' ser o guard padrão
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -30,13 +30,14 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',  // O guard 'web' normalmente usa sessão, mas você pode modificar se usar JWT também
+            'driver' => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'jwt', // Use JWT para autenticação de API
+            'driver' => 'jwt',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
