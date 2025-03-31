@@ -11,5 +11,8 @@ class Unit extends Model
 
     public $timestamps = false; // no timestamps
 
+    protected $fillable = ['name', 'user_owner'];
+
+
 }
 
