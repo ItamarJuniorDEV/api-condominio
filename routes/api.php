@@ -27,7 +27,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 
     // Mural de avisos
-    Route::get('/wall', [WallController::class, 'getAll']);
+    Route::get('/walls', [WallController::class, 'getAll']);
     Route::post('/wall/{id}/like', [WallController::class, 'like']);
 
     // Documentos
