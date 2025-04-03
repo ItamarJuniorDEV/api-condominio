@@ -4,7 +4,57 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Warning;
+use App\Models\Unit;
+
 class WarningController extends Controller
 {
-    //
+    public function getMyWarnings(Request $request)
+    {
+        $array = ['error' => ''];
+
+        $property = $request->input('property');
+        if($property) {
+            $user = $request->user();
+
+            $unit = Unit::where('id', $property)
+            ->where('id_owner', $user['id'])
+            ->count();
+
+            if($unit > 0) {
+
+                $warnings = Warning::where('id_unit', $property)
+                ->orderBy('datecreated', 'DESC')
+                ->orderBy('id', 'DESC')
+                ->get();
+
+                foreach($warnings as $warnKey => $warnValue) {
+                    $warnings[$warnKey]['datecreated'] = date('d/m/Y H:i', strtotime($warnValue['datecreated']));
+                    $photoList = [];
+                    $photos = explode(',', $warnValue['photos']);
+                    foreach($photos as $photo) {
+                        if(!empty($photo)) {
+                            $photoList[] = asset('storage/'.$photo);
+                        }
+                    }
+
+                    $warnings[$warnKey]['photos'] = $photoList;
+                }
+
+                $array['list'] = $warnings;
+
+
+            } else {
+                $array['error'] = 'Propriedade não encontrada.';
+            }
+
+
+        } else {
+            $array['error'] = 'Propriedade não informada';
+            return $array;
+        }
+
+
+        return $array;
+    }
 }
