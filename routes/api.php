@@ -1,20 +1,17 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BilletController;
 use App\Http\Controllers\DocController;
 use App\Http\Controllers\FoundAndLostController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UnitController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\WarningController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/ping', function() {
-    return ['pong'=>true];
+Route::get('/ping', function () {
+    return ['pong' => true];
 });
 
 Route::get('/401', [AuthController::class, 'unauthorized'])->name('login');
@@ -47,10 +44,10 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/foundandlost/{id}', [FoundAndLostController::class, 'update']);
 
     // Unidade
-    Route::get('/units/{id}', [UnitController::class, 'getInfo']);
-    Route::post('/units/{id}/addperson', [UnitController::class, 'addPerson']);
-    Route::post('/units/{id}/addvehicle', [UnitController::class, 'addVehicle']);
-    Route::post('/units/{id}/addpet', [UnitController::class, 'addPet']);
+    Route::get('/unit/{id}', [UnitController::class, 'getInfo']);
+    Route::post('/unit/{id}/addperson', [UnitController::class, 'addPerson']);
+    Route::post('/unit/{id}/addvehicle', [UnitController::class, 'addVehicle']);
+    Route::post('/unit/{id}/addpet', [UnitController::class, 'addPet']);
     Route::post('/unit/{id}/removeperson', [UnitController::class, 'removePerson']);
     Route::post('/unit/{id}/removevehicle', [UnitController::class, 'removeVehicle']);
     Route::post('/unit/{id}/removepet', [UnitController::class, 'removePet']);
@@ -66,4 +63,3 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/reservations/{id}', [ReservationController::class, 'delMyReservation']);
 
 });
-
